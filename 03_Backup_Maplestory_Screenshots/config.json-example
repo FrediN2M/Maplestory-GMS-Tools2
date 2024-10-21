@@ -1,0 +1,7 @@
+{
+  "destination_path": "",
+  "use_steam": 1,
+  "use_nexon": 0,
+  "steam_game_path": "C:\\SteamLibrary\\steamapps\\common\\MapleStory",
+  "nexon_game_path": "C:\\maplestory\\appdata"
+}
