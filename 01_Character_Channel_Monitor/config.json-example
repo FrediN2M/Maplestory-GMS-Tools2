@@ -1,0 +1,17 @@
+{
+  "use_telegram": 0,
+  "telegram_bot_token": "",
+  "chat_id": "",
+  "telegram_api_url": "https://api.telegram.org/bot",
+  "use_webhook": 0,
+  "mUrl": "",
+  "use_steam": 1,
+  "use_nexon": 0,
+  "steam_exe_path": "C:\\Program Files (x86)\\Steam\\steam.exe",
+  "steam_game_app_id": "216150",
+  "nexon_game_app_id": "10100",
+  "nexon_exe_path": "C:\\Program Files (x86)\\Nexon\\Nexon Launcher\\nexon_launcher.exe",
+  "key_path" : "SOFTWARE\\WOW6432Node\\Wizet\\MapleStory",
+  "key_name" : "siCharacterName",
+  "version": "0.1"
+}

@@ -1,0 +1,13 @@
+# Git Ignore file for Github integration
+
+# ignore .log files
+*.log
+
+# ignore json files
+*.json
+
+# Ignore .env
+*.env
+
+# Ignore venv
+*venv

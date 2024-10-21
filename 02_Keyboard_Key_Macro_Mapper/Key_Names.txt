@@ -1,0 +1,33 @@
+WARNING: Use these key names at your own risk.
+Simulating key presses in games may violate the game's terms of service
+and could result in bans or other penalties.
+This list is intended for educational purposes only.
+Proceed with caution and consider the ethical implications of automation.
+
+
+# Alphanumeric Keys
+a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+
+# Function Keys
+f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12
+
+# Modifier Keys
+shift, ctrl, alt, altgr, windows, command, option, fn
+
+# Navigation Keys
+up, down, left, right
+home, end, pageup, pagedown
+
+# Control Keys
+esc, enter, space, tab, backspace, delete, insert
+
+# Punctuation and Symbols
+`, -, =, [, ], \, ;, ', ,, ., /
+
+# Numpad Keys
+num0, num1, num2, num3, num4, num5, num6, num7, num8, num9
+numlock, divide, multiply, subtract, add, decimal
+
+# Special Keys
+capslock, scrolllock, pause, printscreen, menu, select
