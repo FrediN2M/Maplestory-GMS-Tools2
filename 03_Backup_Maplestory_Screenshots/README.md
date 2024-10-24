@@ -13,11 +13,15 @@ This Python script moves JPEG files that start with "Maple" from a specified gam
 
 ## Requirements
 
-    Python 3.x
+- Python 3.x
+- The following Python packages are required:
+- `loguru` (for logging purposes)
 
-loguru library for logging. You can install it via pip:
+You can install `loguru` by running:
 
-    pip install loguru
+```bash
+pip install loguru
+```
 
 ## Configuration
 
