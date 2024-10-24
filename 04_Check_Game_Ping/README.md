@@ -51,7 +51,7 @@ This file contains a mapping of IP addresses to server names. Example:
       "192.168.1.3": "Login 1"
     }
 
-Log Files
+## Log Files
 
 Ping results are saved in `log_data_<network_interface>.json` or `log_data_<vpn_interface>.json` files, depending on the active connection.
 
