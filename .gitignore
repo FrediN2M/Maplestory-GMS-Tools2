@@ -11,3 +11,6 @@
 
 # Ignore venv
 *venv
+
+# Ignore .bat
+*.bat
