@@ -72,13 +72,14 @@ def ping_all_servers(servers):
     return results
 
 
-# Update the log data with the latest pings and calculate averages
+# Update the log data with the latest pings, calculate averages, and track minimum ping
 def update_log_data(log_data, server_name, avg_ping):
     # If the server name is not already in log_data, initialize its structure
     if server_name not in log_data:
         log_data[server_name] = {
             f"{server_name}_previous_pings": [],
-            f"{server_name}_avg": 0
+            f"{server_name}_avg": 0,
+            f"{server_name}_min": float('inf')  # Set initial min value to a very high number
         }
 
     # Update previous pings
@@ -87,6 +88,9 @@ def update_log_data(log_data, server_name, avg_ping):
         # Recalculate the average
         total_pings = log_data[server_name][f"{server_name}_previous_pings"]
         log_data[server_name][f"{server_name}_avg"] = round(sum(total_pings) / len(total_pings))
+
+        # Update the minimum ping if the current one is lower
+        log_data[server_name][f"{server_name}_min"] = min(log_data[server_name][f"{server_name}_min"], avg_ping)
 
 
 # Custom sorting function for the server names
@@ -133,20 +137,21 @@ def print_comparison(log_data, server_name, avg_ping):
     if server_name not in log_data:
         log_data[server_name] = {
             f"{server_name}_previous_pings": [],
-            f"{server_name}_avg": 0
+            f"{server_name}_avg": 0,
+            f"{server_name}_min": "N/A"
         }
 
-    previous_avg = log_data[server_name][f"{server_name}_avg"]
+    recorded_min = log_data[server_name][f"{server_name}_min"]
 
     # Comparison logic with a check for the previous average being 0 (no previous pings)
     if avg_ping == "N/A":
         print(f"Server: {server_name}, Avg Ping: {avg_ping}")
-    elif avg_ping > previous_avg:
-        print(f"Server: {server_name}, Avg Ping: {avg_ping} ms, higher than previously average ping ({previous_avg} ms)")
-    elif avg_ping < previous_avg:
-        print(f"Server: {server_name}, Avg Ping: {avg_ping} ms, lower than previously average ping ({previous_avg} ms)")
+    elif avg_ping > recorded_min:
+        print(f"Server: {server_name}, Avg Ping: {avg_ping} ms, higher than minimum recorded ping ({recorded_min} ms)")
+    elif avg_ping < recorded_min:
+        print(f"Server: {server_name}, Avg Ping: {avg_ping} ms, lower than minimum recorded ping ({recorded_min} ms)")
     else:
-        print(f"Server: {server_name}, Avg Ping: {avg_ping} ms, equal to previously average ping ({previous_avg} ms)")
+        print(f"Server: {server_name}, Avg Ping: {avg_ping} ms, equal to minimum recorded ping ({recorded_min} ms)")
 
 
 def load_configuration_files():

@@ -12,7 +12,7 @@ It also provides additional functionality, such as detecting VPN connections and
 - Pings each game server multiple times to determine an average ping.
 - Detects whether the computer is connected through a VPN or a regular network interface.
 - Uses the detected network or VPN interface to store log data in corresponding JSON files.
-- Compares current average ping with previously recorded averages and provides feedback on whether the current ping is higher, lower, or equal.
+- Compares current average ping with previously recorded minimum and provides feedback on whether the current ping is higher, lower, or equal.
 - Saves all historical ping results for each server in a JSON file for analysis.
 
 ## Requirements
@@ -68,14 +68,14 @@ The script will:
     Detect whether you're connected via a regular network interface or a VPN.
     Ping all servers listed in game_servers.json.
     Save results in the appropriate log file (log_data_<network_interface>.json or log_data_<vpn_interface>.json).
-    Display a comparison between the current and previous average pings for each server.
+    Display a comparison between the current and minimum recorded pings for each server.
 
 ## Example Output
 
 
     Using network interface: Ethernet
-    Server: CH 01, Avg Ping: 85 ms, higher than previously average ping (78 ms)
-    Server: Login 1, Avg Ping: 120 ms, lower than previously average ping (130 ms)
+    Server: CH 01, Avg Ping: 85 ms, higher than minimum recorded ping (78 ms)
+    Server: Login 1, Avg Ping: 120 ms, lower than minimum recorded ping (130 ms)
 
 ## Error Handling
 
