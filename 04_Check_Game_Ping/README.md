@@ -5,7 +5,7 @@
 This script allows you to ping multiple game servers, calculate average ping values, and store the results in JSON log files. 
 It also provides additional functionality, such as detecting VPN connections and using the active network or VPN interface to determine which log file to store the data in.
 
-* Important Note: This does not replace ExitLag or similar apps, it might help in a similar way to them by changing the default routing your pc uses to reach game servers. ISPs default routing is usually not optimized for gaming.
+* Important Note: This does not replace ExitLag or similar apps, it might help in a similar way to them by changing the default routing your pc uses to reach game servers. ISPs default routing is usually not optimized for gaming, also ISPs might throttle and use some QoS on all traffic, but VPN should prevent them from doing so. 
 
 ## Features
 
