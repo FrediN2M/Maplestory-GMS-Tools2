@@ -1,26 +1,75 @@
-# Maplestory GMS Character Channel Monitor
-A python script that can back up user in-game screenshots to custom directory.
-deleting the game or re-installing might delete in-game screenshots, this helps mitigate loss of screenshots.
+File Mover Script
+Overview
 
-## Table of Contents
-- [Installation](#installation)
-- [Usage](#usage)
-- [Features](#features)
+This Python script moves JPEG files that start with "Maple" from a specified source directory to a destination directory. It is designed to work with game clients such as Steam and Nexon, allowing for configurable source paths through a JSON configuration file. The script also logs the moving process and any errors encountered.
+Features
 
-## Installation
-1. Clone the repository locally.
-2. Modify the config.json file:
-* use_steam - 1 or 0, search files for game used in steam client
-* use_nexon - 1 or 0, search files for game used in nexon launcher
-* steam_game_path - path to maplestory directory that holds the screenshots via steam client
-* nexon_game_path - path to maplestory directory that holds the screenshots via nexon launcher
+    Moves .jpg files starting with "Maple" from the selected game client directory to a specified destination.
+    Handles filename collisions by appending a counter to the new filename.
+    Logs details about moved files, including their sizes and total moved file statistics.
+    Reads configuration settings from a config.json file.
 
+Requirements
 
-## Usage
-1. Open Command/Terminal in the path of the code
-2. Type "python Backup_Script.py" and press enter
+    Python 3.x
 
+    loguru library for logging. You can install it via pip:
 
-## Features
-1. Moves screenshots
-3. TBD - tkinter UI.
+    bash
+
+    pip install loguru
+
+Configuration
+
+Before running the script, you must create a config.json file. An example configuration file config.json-example is provided in the repository. To use it:
+
+    Copy config.json-example to a new file named config.json:
+
+    bash
+
+    cp config.json-example config.json
+
+    Edit the config.json file with your desired settings:
+
+json
+
+{
+  "destination_path": "",
+  "use_steam": 1,
+  "use_nexon": 0,
+  "steam_game_path": "C:\\SteamLibrary\\steamapps\\common\\MapleStory",
+  "nexon_game_path": "C:\\maplestory\\appdata"
+}
+
+    destination_path: The directory where the files will be moved. This should be a valid path.
+    use_steam: Set to 1 to use the Steam game path, or 0 otherwise.
+    use_nexon: Set to 1 to use the Nexon game path, or 0 otherwise.
+    steam_game_path: The path to the directory containing the Steam game files.
+    nexon_game_path: The path to the directory containing the Nexon game files.
+
+Usage
+
+    Ensure you have Python and the necessary dependencies installed.
+
+    Modify the config.json file to set your desired paths and flags.
+
+    Run the script from the command line:
+
+    bash
+
+    python script_name.py
+
+    Replace script_name.py with the actual name of your script file.
+
+Logging
+
+The script creates a log file named App_Log_{time}.log in the same directory as the script. This log file contains information about the files moved, errors encountered, and statistics about the operation.
+Error Handling
+
+If the script encounters an issue (e.g., missing configuration file or file access error), it will log an error message to the log file.
+License
+
+This script is open-source. You can modify and distribute it as you see fit.
+Contributing
+
+If you would like to contribute to this project, feel free to submit issues or pull requests.
