@@ -24,3 +24,8 @@ A python script that can macro keys in games.
 ## Features
 1. Map Macro keys.
 2. TBD - tkinter UI
+
+
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.

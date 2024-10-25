@@ -33,3 +33,6 @@ A python script that can help a gamer log his channel changes of his in-game cha
 1. Log changes of user channel changes to log file.
 2. Send history of channel changes via webhook or telegram.
 3. TBD - tkinter UI.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.

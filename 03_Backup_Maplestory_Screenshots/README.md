@@ -70,8 +70,8 @@ The script creates a log file named App_Log_{time}.log in the same directory as 
 If the script encounters an issue (e.g., missing configuration file or file access error), it will log an error message to the log file.
 
 ## License
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
 
-This script is open-source. You can modify and distribute it as you see fit.
 ## Contributing
 
 If you would like to contribute to this project, feel free to submit issues or pull requests.

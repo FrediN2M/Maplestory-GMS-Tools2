@@ -87,8 +87,8 @@ If psutil is not installed, the script will exit with the following message:
 Make sure to install the required package to proceed.
 
 ## License
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
 
-This script is open-source. You can modify and distribute it as you see fit.
 ## Contributing
 
 If you would like to contribute to this project, feel free to submit issues or pull requests.
