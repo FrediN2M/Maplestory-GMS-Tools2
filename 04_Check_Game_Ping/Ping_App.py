@@ -255,7 +255,7 @@ def load_configuration_files():
 
 
 if __name__ == "__main__":
-    logger.add("App_Log_{time}.log", rotation="30 days", backtrace=True, enqueue=False, catch=True)
+    logger.add("App_Log.log", rotation="30 days", backtrace=True, enqueue=False, catch=True)
 
     try:
         # Load Config and Servers
