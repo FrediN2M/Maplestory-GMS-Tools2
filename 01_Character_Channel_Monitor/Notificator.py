@@ -29,6 +29,24 @@ def telegram_message(telegram_api_url, bot_token, chat_id, timevar, seen_connect
         logger.warning('Process is not running')
 
 
+def send_telegram_message(base_url, chat_id, text):
+    url = base_url + 'sendMessage'
+    data = {
+        'chat_id': chat_id,
+        'text': text
+    }
+
+    while True:
+        response = requests.post(url, json=data)
+        if response.status_code == 200:
+            logger.info('Message sent successfully!')
+            break
+        else:
+            logger.error(f'Failed to send message. Error code: {response.status_code}')
+            # Wait for a few seconds before retrying
+            time.sleep(2)
+
+
 def webhook_message(mUrl, timevar, seen_connections, ch_history):
     if seen_connections:
         msg = ch_history[-1]
@@ -53,26 +71,7 @@ def webhook_message(mUrl, timevar, seen_connections, ch_history):
         logger.warning('Process is not running')
 
 
-def send_telegram_message(base_url, chat_id, text):
-    url = base_url + 'sendMessage'
-    data = {
-        'chat_id': chat_id,
-        'text': text
-    }
-
-    while True:
-        response = requests.post(url, json=data)
-        if response.status_code == 200:
-            logger.info('Message sent successfully!')
-            break
-        else:
-            logger.error(f'Failed to send message. Error code: {response.status_code}')
-            # Wait for a few seconds before retrying
-            time.sleep(2)
-
-
 def send_webhook_message(m_url, msg):
-
     # Ensure the message is formatted correctly
     data = {"content": msg}
 
