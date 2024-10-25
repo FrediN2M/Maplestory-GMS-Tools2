@@ -20,6 +20,7 @@ class PingApp:
 
         self.running = False
         self.lowest_pings = {ip: None for ip in self.servers.keys()}
+        self.average_pings = {ip: [] for ip in self.servers.keys()}  # Dictionary to hold lists of pings for each server
         self.ping_queue = Queue()
         self.elapsed_time = 0.0  # Store as float for precision
         self.ping_thread = None
@@ -46,7 +47,7 @@ class PingApp:
         self.stop_button.pack(side=tk.LEFT, padx=5)
 
         tk.Button(button_frame, text="Export to Log", command=self.export_log).pack(side=tk.LEFT, padx=5)
-        tk.Button(button_frame, text="Instructions", command=self.show_instructions).pack(side=tk.LEFT, padx=5)
+        tk.Button(button_frame, text="Information", command=self.show_information).pack(side=tk.LEFT, padx=5)
 
         # Network interface display
         self.network_interface_label = tk.Label(self.master, text="Current Network Interface: ")
@@ -60,10 +61,11 @@ class PingApp:
         self.tree_frame = tk.Frame(self.master)
         self.tree_frame.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
 
-        self.tree = ttk.Treeview(self.tree_frame, columns=("Server", "Ping", "Lowest Ping"), show='headings')
+        self.tree = ttk.Treeview(self.tree_frame, columns=("Server", "Ping", "Lowest Ping", "Average Ping"), show='headings')
         self.tree.heading("Server", text="Server")
         self.tree.heading("Ping", text="Ping")
         self.tree.heading("Lowest Ping", text="Lowest Ping")
+        self.tree.heading("Average Ping", text="Average Ping")
 
         self.tree_scroll = ttk.Scrollbar(self.tree_frame, orient="vertical", command=self.tree.yview)
         self.tree.configure(yscroll=self.tree_scroll.set)
@@ -184,8 +186,12 @@ class PingApp:
     def process_queue(self):
         while not self.ping_queue.empty():
             ip, ping_time = self.ping_queue.get()
+            # Update lowest ping if applicable
             if self.lowest_pings[ip] is None or ping_time < self.lowest_pings[ip]:
                 self.lowest_pings[ip] = ping_time
+
+            # Add the ping to the list for average calculation
+            self.average_pings[ip].append(ping_time)
             self.update_tree(ip, ping_time)
 
     def ping_server(self, ip, name):
@@ -201,17 +207,21 @@ class PingApp:
     def get_port(self, name):
         if "Login" in name:
             return 8484
-        elif name in ["AH", "CS"]:
+        elif "AH" in name or "CS" in name:
             return 8786
         else:
             return 8585
 
     def update_tree(self, ip, ping):
+        # Calculate average ping for the server
+        average_ping = int(sum(self.average_pings[ip]) / len(self.average_pings[ip])) if self.average_pings[ip] else 0
+
         for item in self.tree.get_children():
             values = self.tree.item(item, 'values')
             if values[0] == self.servers[ip]:
                 lowest_ping = f"{self.lowest_pings[ip]} ms" if self.lowest_pings[ip] is not None and self.lowest_pings[ip] != float('inf') else ""
-                self.tree.item(item, values=(values[0], f"{ping} ms" if ping != float('inf') else "Timeout", lowest_ping))
+                average_ping_text = f"{average_ping} ms" if average_ping != float('inf') else "Timeout"
+                self.tree.item(item, values=(values[0], f"{ping} ms" if ping != float('inf') else "Timeout", lowest_ping, average_ping_text))
                 break
 
     def export_log(self):
@@ -227,20 +237,19 @@ class PingApp:
                     f.write(f"{name} - Current Ping: {ping} - Lowest Ping: {lowest_ping} ms\n")
             messagebox.showinfo("Export", "Log exported successfully.")
 
-    def show_instructions(self):
-        instructions_window = tk.Toplevel(self.master)
-        instructions_window.title("Instructions")
-        instructions_window.transient(self.master)
-        instructions_window.grab_set()
-        instructions_text = """Instructions:
-        1. Click 'Start' to begin pinging the servers.
-        2. Click 'Stop' to halt the pinging process.
-        3. Click 'Export to Log' to save the current table to a log file.
-        4. Click 'Instructions' for this help window.
+    def show_information(self):
+        information_window = tk.Toplevel(self.master)
+        information_window.title("Information")
+        information_window.transient(self.master)
+        information_window.grab_set()
+        information_text = """Information:
+        Click 'Start' to begin pinging the servers.
+        Click 'Stop' to halt the pinging process.
+        Optional - Click 'Export to Log' to save the current table to a log file.
         """
-        label = tk.Label(instructions_window, text=instructions_text, padx=10, pady=10)
+        label = tk.Label(information_window, text=information_text, padx=10, pady=10)
         label.pack()
-        tk.Button(instructions_window, text="Close", command=instructions_window.destroy).pack(pady=5)
+        tk.Button(information_window, text="Close", command=information_window.destroy).pack(pady=5)
 
 
 if __name__ == "__main__":
