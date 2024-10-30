@@ -1,70 +1,68 @@
 # Server Ping Monitor
 
-`Server Ping Monitor` is a Tkinter-based GUI application for monitoring the ping times of multiple servers in real-time. This tool also supports VPN detection, allowing users to view the active network interface (VPN or standard) being used for the connection. Additional functionalities include exporting log files, updating in-app instructions, and dynamically updating the lowest ping observed per server.
+## Overview
+
+The **Server Ping Monitor** is a Python application that allows users to monitor the ping times of multiple servers. It provides real-time updates on server status, including the lowest, average, and failed pings. The application also detects ping spikes and tracks network interface changes, making it a valuable tool for network administrators and gamers alike.
 
 ## Features
 
-- **Real-time Server Monitoring**: Track the ping times to multiple servers with live updates.
-- **VPN Detection**: Identifies if the active network interface is a VPN connection based on keywords specified in `config.json`.
-- **Lowest Ping Tracking**: Displays the lowest ping observed for each server since the last network interface change.
-- **Export Log**: Export current data to a log file.
-- **Elapsed Time Display**: Shows how long the ping monitoring has been active in `HH:MM:SS.MS` format.
-- **Responsive Controls**: Enables/disables controls based on the pinging status.
-- **Customizable Settings**: Load server configurations from `game_servers.json` and VPN keywords from `config.json`.
+- **Server Monitoring**: Continuously pings multiple servers and displays their current ping times.
+- **Spike Detection**: Identifies and logs spikes in ping times (15% over average).
+- **User Interface**: Built with Tkinter for a user-friendly GUI that displays ping statistics in a table format.
+- **Logging**: Exports log data to a file for later analysis.
+- **VPN Detection**: Automatically detects if a VPN is in use based on keywords in network interfaces.
+- **Customizable**: Supports easy modification of monitored servers via a JSON configuration file.
 
 ## Installation
 
-1. Clone the repository or download the files to your local machine.
-2. Install the required Python packages:
+To run the Server Ping Monitor, ensure you have Python 3 installed on your machine. You will also need the following packages:
+
+- `tkinter` (included with standard Python installations)
+- `concurrent.futures` (included with standard Python installations)
+- `psutil` (for network interface handling)
+- `loguru` (for logging)
+
+You can install `psutil` and `loguru` using pip:
 
 ```bash
-pip install -r requirements.txt
+pip install psutil loguru
 ```
-
-
-## Configuration
-
-Server Configurations: Ensure that game_servers.json is in the same directory. This file should contain the server IPs and names in JSON format:
-
-    {
-        "192.168.1.1": "Server1",
-        "192.168.1.2": "Server2"
-    }
-
-VPN Detection: Include config.json with a vpn_keywords key to specify VPN identifiers:
-
-    {
-        "vpn_keywords": ["ProtonVPN", "VPN"]
-    }
 
 ## Usage
 
-Run the script:
+1. **Configuration**:
+   - Create a file named `game_servers.json` in the same directory as the application. This file should contain a JSON object with server IPs and their names. For example:
+   `json
+   {
+       "192.168.1.1": "Game Server 1",
+       "192.168.1.2": "Game Server 2"
+   }
+   `
+   - Create a `config.json` file with VPN keywords:
+   `json
+   {
+       "vpn_keywords": ["vpn", "secure", "private"]
+   }
+   `
 
+2. **Running the Application**:
+   - Execute the script:
+   `python server_ping_monitor.py`
 
-    python Live_Ping_App.py
+3. **Using the GUI**:
+   - Click the **Start** button to begin monitoring.
+   - Click the **Stop** button to halt the monitoring process.
+   - Use the **Export to Log** button to save the ping data to a log file.
+   - Click **Information** for a brief description of the application’s features.
 
-* Start Monitoring: Click Start to begin pinging servers.
-* Stop Monitoring: Click Stop to end the pinging process.
-* Export Log: Save the current ping data to a log file by clicking Export to Log.
-* Instructions: For help, click Instructions in the app.
+## Logging
 
-## Interface
+The application logs activities and errors to a file named `App_Log_<date>.log`, which can be helpful for troubleshooting. It also provides a structured log export for the monitored servers.
 
-    Start/Stop Buttons: Begin or halt the pinging process.
-    Elapsed Time Display: Shows the elapsed time since the start of pinging.
-    Current Network Interface: Displays the current active interface, with VPN detection if a VPN is connected.
-    Ping Table: Real-time updates of the ping and lowest ping values for each server.
+## Conclusion
 
-## Dependencies
-
-    Python 3.7 or higher
-    Tkinter: Included in standard Python installations
-    Additional Packages: Listed in requirements.txt
+The Server Ping Monitor is an effective tool for keeping track of server performance and ensuring network reliability. Feel free to modify the code and configuration files to suit your needs.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
 
-## Contributing
-
-If you would like to contribute to this project, feel free to submit issues or pull requests.
+This project is open-source and available for modification. Please adhere to the MIT License for any distributions.
